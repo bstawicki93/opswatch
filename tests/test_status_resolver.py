@@ -1,13 +1,17 @@
+import pytest
 from status_resolver import resolve_status
 
-def test_status_200():
-    assert resolve_status(200) == "UP"
+@pytest.mark.parametrize(
+    "status_code, expected",
+    [
+        (200, "UP"),
+        (503, "DOWN"),
+        (None, "UNKNOWN"),
+        (299, "UP"),
+        (199, "DOWN"),
+        (300,"DOWN"),
+    ]
+)
 
-def test_status_503():
-    assert resolve_status(503) == "DOWN"
-
-def test_status_none():
-    assert resolve_status(None) == "UNKNOWN"
-
-def test_status_299():
-    assert resolve_status(299) == "UP"
+def test_resolve_status(status_code, expected):
+    assert resolve_status(status_code) == expected
