@@ -15,3 +15,8 @@ from status_resolver import resolve_status
 
 def test_resolve_status(status_code, expected):
     assert resolve_status(status_code) == expected
+
+def test_status_invalid_type():
+    with pytest.raises(TypeError):
+        resolve_status("200")
+
