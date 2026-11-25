@@ -4,9 +4,10 @@ from port_validator import validate_port
 @pytest.mark.parametrize(
     "port_number, expected",
     [
+        (1, True),
         (80, True),
         (443,True),
-        (65535,True),
+        (65535,True), 
     ]
 )
 
